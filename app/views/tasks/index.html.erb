@@ -5,11 +5,14 @@
     <th>Task</th>
     <th>内容</th>
   </tr>
-  <tr>
-    <% @tasks.each do |task| %>
+  <% @tasks.each do |task| %>
+    <tr>
       <td><%= task.title %></td>
       <td><%= task.content %></td>
       <td><%= link_to '詳細', task_path(task) %></td>
-    <% end  %>
-  </tr>
+      <td><%= link_to '編集', edit_task_path(task) %></td>
+      <td><%= link_to '削除', task_path(task), method: :delete, data: { confirm: '本当に削除しても良いですか？' }  %></td>
+    </tr>
+  <% end %>
 </table>
+<%= link_to 'Create new Task', new_task_path %>
