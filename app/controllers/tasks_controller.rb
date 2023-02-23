@@ -3,11 +3,26 @@ class TasksController < ApplicationController
 
   def index
     if params[:sort_expired]
-      @tasks = Task.all.order(due_date: :desc)
+      @tasks = Task.due_date_sort
     elsif params[:priority_expired]
-      @tasks = Task.all.order(priority: :desc)
+      @tasks = Task.priority_sort
     else
-      @tasks = Task.all.order(created_at: :desc)
+      @tasks = Task.created_at_sort
+    end
+  end
+
+  def search
+    if params[:task].present?
+      if params[:task][:title].present? && params[:task][:status].present?
+        @tasks = Task.title_status_search(params[:task][:title],params[:task][:status])
+        render :index
+      elsif params[:task][:title].present?
+        @tasks = Task.title_search(params[:task][:title])
+        render :index
+      elsif params[:task][:status].present?
+        @tasks = Task.status_search(params[:task][:status])
+        render :index
+      end
     end
   end
 
