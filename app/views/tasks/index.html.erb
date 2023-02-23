@@ -1,4 +1,10 @@
-<h1>Tasks</h1>
+<%= form_with(scope: :task, url: search_tasks_path, method: :get, local: true) do |f|%>
+  <%= f.label :title_search %>
+  <%= f.text_field :title %>
+  <%= f.label :status_search %>
+  <%= f.select :status, Task.statuses.keys, include_blank: true %>
+  <%= f.submit 'Search' %>
+<% end %>
 
 <table>
   <tr>
@@ -15,11 +21,11 @@
       <td><%= task.due_date %></td>
       <td><%= task.status %></td>
       <td><%= task.priority %></td>
-      <td><%= link_to '詳細', task_path(task) %></td>
-      <td><%= link_to '編集', edit_task_path(task) %></td>
-      <td><%= link_to '削除', task_path(task), method: :delete, data: { confirm: '本当に削除しても良いですか？' }  %></td>
+      <td><%= link_to '詳細', task_path(task), class: "btn btn-info" %></td>
+      <td><%= link_to '編集', edit_task_path(task), class: "btn btn-secondary" %></td>
+      <td><%= link_to '削除', task_path(task), method: :delete, data: { confirm: '本当に削除しても良いですか？' }, class: "btn btn-dark" %></td>
     </tr>
   <% end %>
 </table>
-<%= link_to 'Create new Task', new_task_path %>
+<%= link_to 'Create new Task', new_task_path, class: "btn btn-primary" %>
 <%= paginate @tasks %>

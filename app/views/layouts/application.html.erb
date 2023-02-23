@@ -6,26 +6,23 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body>
-      <%= form_with(scope: :task, url: search_tasks_path, method: :get, local: true) do |f|%>
-        <%= f.label :title_search %>
-        <%= f.text_field :title %>
-        
-        <%= f.label :status_search %>
-        <%= f.select :status, Task.statuses.keys, include_blank: true %>
-        
-        <%= f.submit 'Search' %>
-     
-      <% end %>
+  <header>
+    <li><%= link_to 'Tasks', tasks_path %></li>
+  </header>
 
+  <body>
       <% flash.each do |key, value| %>
         <%= content_tag(:div, value, class: "#{key}") %>
       <% end %>
 
       <%= yield %>
   </body>
+
+  <footer>
+    <p>作成：万葉課題</p>
+  </footer>
 </html>
