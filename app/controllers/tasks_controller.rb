@@ -4,6 +4,8 @@ class TasksController < ApplicationController
   def index
     if params[:sort_expired]
       @tasks = Task.all.order(due_date: :desc)
+    elsif params[:priority_expired]
+      @tasks = Task.all.order(priority: :desc)
     else
       @tasks = Task.all.order(created_at: :desc)
     end
@@ -48,6 +50,6 @@ class TasksController < ApplicationController
   end
 
   def task_params
-    params.require(:task).permit(:title, :content)
+    params.require(:task).permit(:title, :content, :due_date, :status, :priority)
   end
 end
