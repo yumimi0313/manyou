@@ -13,13 +13,16 @@ FactoryBot.define do
   factory :second_task, class: Task do
     title { 'new' }
     content { 'new_content' }
-    due_date { '2022/11/01' }
+    due_date { '2022/12/01' }
     status { '着手中'}
     priority { '中' }
   end
 
-    factory :third_task, class: Task do
+  factory :third_task, class: Task do
     title { 'shine' }
     content { 'shine_content' }
+    due_date { '2022/11/01' }
+    status { '着手中'}
+    priority { '中' }
   end
 end
