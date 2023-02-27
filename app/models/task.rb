@@ -4,6 +4,7 @@ class Task < ApplicationRecord
   validates :due_date, presence: true
   validates :status, presence: true
   validates :priority, presence: true
+  belongs_to :user
   
   #scope、クラスメソッド（モデルクラスに対して働きかけるメソッド）のように呼び出せる
   scope :created_at_sort, -> { order(created_at: :desc) }

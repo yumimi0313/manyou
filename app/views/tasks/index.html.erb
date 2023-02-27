@@ -22,9 +22,12 @@
       <td><%= task.status %></td>
       <td><%= task.priority %></td>
       <td><%= link_to '詳細', task_path(task), class: "btn btn-info" %></td>
-      <td><%= link_to '編集', edit_task_path(task), class: "btn btn-secondary" %></td>
-      <td><%= link_to '削除', task_path(task), method: :delete, data: { confirm: '本当に削除しても良いですか？' }, class: "btn btn-dark" %></td>
-    </tr>
+      <% if task.user == current_user %>
+        <td><%= link_to '編集', edit_task_path(task), class: "btn btn-secondary" %></td>
+        <td><%= link_to '削除', task_path(task), method: :delete, data: { confirm: '本当に削除しても良いですか？' }, class: "btn btn-dark" %></td>
+      <% else %>
+      <% end %>
+      </tr>
   <% end %>
 </table>
 <%= link_to 'Create new Task', new_task_path, class: "btn btn-primary" %>

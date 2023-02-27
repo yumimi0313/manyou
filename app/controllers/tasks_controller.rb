@@ -3,11 +3,11 @@ class TasksController < ApplicationController
 
   def index
     if params[:sort_expired]
-      @tasks = Task.due_date_sort.page(params[:page])
+      @tasks = current_user.tasks.due_date_sort.page(params[:page])
     elsif params[:priority_expired]
-      @tasks = Task.priority_sort.page(params[:page])
+      @tasks = current_user.tasks.priority_sort.page(params[:page])
     else
-      @tasks = Task.created_at_sort.page(params[:page])
+      @tasks = current_user.tasks.created_at_sort.page(params[:page])
     end
   end
 
@@ -32,6 +32,8 @@ class TasksController < ApplicationController
 
   def create
     @task = Task.new(task_params)
+    @task = current_user.tasks.build(task_params)
+
     if @task.save
       redirect_to tasks_path, notice: '保存しました'
     else
