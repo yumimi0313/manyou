@@ -5,5 +5,12 @@ class User < ApplicationRecord
   before_validation { email.downcase! }
   has_secure_password
   validates :password, length: { minimum:6 }
-  has_many :tasks
+  before_destroy :should_not_destroy_admin
+  has_many :tasks, dependent: :destroy
+
+  private
+  def should_not_destroy_admin
+  # 管理者権限を持つユーザーが１名かつ@userが管理者権限を持っていたら ->trueのとき、throw(:abort)でrollbackを起こす。
+  throw(:abort) if User.where(admin: true).count == 1 && self.admin?
+  end
 end

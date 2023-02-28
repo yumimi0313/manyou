@@ -1,0 +1,18 @@
+<h1><%= @user.name %>のページ</h1>
+
+<table>
+  <tr>
+    <th>タスクの数</th>
+    <th>Title</th>
+    <th>Content</th>
+  </tr>
+  <% @user.tasks.each do |task| %>
+      <td><%= user.tasks.count %></td>
+      <td><%= user.tasks.title %></td>
+      <td><%= user.tasks.content %></td>
+      </tr>
+  <% end %>
+</table>
+
+<%= link_to 'Edit', edit_admin_user_path(@user.id) %>
+<%= link_to 'Back', admin_users_path %>

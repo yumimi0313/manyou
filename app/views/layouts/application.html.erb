@@ -12,6 +12,18 @@
 
   <header>
     <li><%= link_to 'Tasks', tasks_path %></li>
+
+    <% if current_user.admin? %>
+      <li><%= link_to 'ユーザー一覧', admin_users_path %></li>
+    <% end %>
+
+    <% if logged_in? %>
+      <li><%= link_to 'Profille', admin_user_path(current_user.id) %></li>
+      <li><%= link_to 'Log out', session_path(current_user.id), method: :delete %></li>
+    <% else %>
+      <li><%= link_to 'Sign in', new_admin_user_path %></li>
+      <li><%= link_to 'Log in', new_session_path %></li>
+    <% end %>
   </header>
 
   <body>
@@ -19,13 +31,7 @@
         <%= content_tag(:div, value, class: "#{key}") %>
       <% end %>
 
-      <% if logged_in? %>
-        <%= link_to "Profile", user_path(current_user.id) %>
-        <%= link_to "Logout", session_path(current_user.id), method: :delete %>
-      <% else %>
-        <%= link_to "Sign up", new_user_path %>
-        <%= link_to "Login", new_session_path %>
-      <% end %>
+
 
       <%= yield %>
   </body>
