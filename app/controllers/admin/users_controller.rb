@@ -40,8 +40,9 @@ before_action :set_user, only: [:show, :edit, :update, :destroy]
 
   private
   def admin_user
-    redirect_to tasks_path unless current_user.admin?
-    flash.now[:danger] = '管理者以外はアクセス出来ません'
+    if !current_user.admin?
+      redirect_to tasks_path, notice: '管理者以外はアクセス出来ません'
+    end
   end
 
   def user_params

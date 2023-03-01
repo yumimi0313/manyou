@@ -4,7 +4,7 @@ class UsersController < ApplicationController
 
   def new
     @user = User.new
-    if current_user.id != @user.id
+    if logged_in?
       redirect_to tasks_path
     else
       render :new
@@ -15,7 +15,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       session[:user_id] = @user.id
-      redirect_to admin_user_path(@user.id), notice: "保存しました"
+      redirect_to user_path(@user.id), notice: "保存しました"
     else
       render :new
     end
@@ -23,7 +23,7 @@ class UsersController < ApplicationController
 
   def show
     if current_user.id != @user.id
-      redirect_to tasks_path
+      redirect_to tasks_path, notice: "ユーザが異なりアクセス出来ません"
     else
       render :show
     end
@@ -40,7 +40,7 @@ class UsersController < ApplicationController
 
   def update
     if @user.update(user_params)
-      redirect_to admin_user_path(@user.id), notice: '保存しました'
+      redirect_to user_path(@user.id), notice: '保存しました'
     else
       render :edit
     end

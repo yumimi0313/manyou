@@ -1,5 +1,8 @@
 <h1><%= @user.name %>のページ</h1>
 
+<p>メール：　<%= @user.email %></p>
+<p>管理者：　<%= @user.admin? ? 'あり': 'なし' %></p>
+
 <table>
   <tr>
     <th>タスクの数</th>

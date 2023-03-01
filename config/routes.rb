@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
+  root to: 'tasks#index'
   resources :tasks do
     get :search, on: :collection
   end
+  resources :users
   namespace :admin do
     resources :users
   end
