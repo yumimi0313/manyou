@@ -5,15 +5,14 @@
 
 <table>
   <tr>
-    <th>タスクの数</th>
     <th>Title</th>
     <th>Content</th>
   </tr>
   <% @user.tasks.each do |task| %>
-      <td><%= user.tasks.count %></td>
-      <td><%= user.tasks.title %></td>
-      <td><%= user.tasks.content %></td>
-      </tr>
+    <tr>
+      <td><%= task.title %></td>
+      <td><%= task.content %></td>
+    </tr>
   <% end %>
 </table>
 

@@ -1,5 +1,6 @@
 <h1>Show</h1>
 <p>Task: <%= @task.title %></p>
 <p>内容: <%= @task.content %></p>
+<p>ユーザー名：　<%= @task.user.name %></p>
 
 <%= link_to 'Back', tasks_path %>

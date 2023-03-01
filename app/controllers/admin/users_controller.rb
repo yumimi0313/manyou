@@ -13,7 +13,7 @@ before_action :set_user, only: [:show, :edit, :update, :destroy]
   def create
     @user = User.new(user_params)
     if @user.save
-      redirect_to admin_user_path(@user.id), notice: "保存しました"
+      redirect_to admin_users_path, notice: "保存しました"
     else
       render :new
     end
@@ -46,7 +46,7 @@ before_action :set_user, only: [:show, :edit, :update, :destroy]
   end
 
   def user_params
-    params.require(:user).permit(:name, :email, :password, :password_confirmation)
+    params.require(:user).permit(:name, :email, :admin, :password, :password_confirmation)
   end
 
   def set_user
