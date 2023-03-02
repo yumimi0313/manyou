@@ -23,6 +23,8 @@
   
   <p><%= f.label :priority %><br/ >
   <%= f.select :priority, Task.priorities.keys %></p>
+
+  <p><%= f.collection_check_boxes(:label_ids, Label.all, :id, :name) %></p>
   
   <%= f.submit '登録する' %>
 

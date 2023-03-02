@@ -5,6 +5,9 @@ class Task < ApplicationRecord
   validates :status, presence: true
   validates :priority, presence: true
   belongs_to :user
+  has_many :labellings, dependent: :destroy
+  has_many :labels, through: :labellings
+  accepts_nested_attributes_for :labels, allow_destroy: true
   
   #scope、クラスメソッド（モデルクラスに対して働きかけるメソッド）のように呼び出せる
   scope :created_at_sort, -> { order(created_at: :desc) }
