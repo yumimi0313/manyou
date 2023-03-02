@@ -12,13 +12,24 @@
 
   <header>
     <li><%= link_to 'Tasks', tasks_path %></li>
+
+    <% if logged_in? %>
+      <% if current_user.admin? %>
+        <li><%= link_to 'ユーザー一覧', admin_users_path %></li>
+      <% end %>
+      <li><%= link_to 'Profille', user_path(current_user.id) %></li>
+      <li><%= link_to 'Log out', session_path(current_user.id), method: :delete %></li>
+    <% else %>
+      <li><%= link_to 'Sign in', new_user_path %></li>
+      <li><%= link_to 'Log in', new_session_path %></li>
+    <% end %>
   </header>
 
   <body>
       <% flash.each do |key, value| %>
         <%= content_tag(:div, value, class: "#{key}") %>
       <% end %>
-
+      
       <%= yield %>
   </body>
 

@@ -1,0 +1,20 @@
+<h1><%= @user.name %>のページ</h1>
+
+<p>メール：　<%= @user.email %></p>
+<p>管理者：　<%= @user.admin? ? 'あり': 'なし' %></p>
+
+<table>
+  <tr>
+    <th>Title</th>
+    <th>Content</th>
+  </tr>
+  <% @user.tasks.each do |task| %>
+    <tr>
+      <td><%= task.title %></td>
+      <td><%= task.content %></td>
+    </tr>
+  <% end %>
+</table>
+
+<%= link_to 'Edit', edit_admin_user_path(@user.id) %>
+<%= link_to 'Back', admin_users_path %>
