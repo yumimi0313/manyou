@@ -2,5 +2,6 @@
 <p>Task: <%= @task.title %></p>
 <p>内容: <%= @task.content %></p>
 <p>ユーザー名：　<%= @task.user.name %></p>
+<p>ラベル：　<% @task.labels.each do |label| %><%= label.name %><% end %></p>
 
 <%= link_to 'Back', tasks_path %>

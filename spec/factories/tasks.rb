@@ -8,7 +8,7 @@ FactoryBot.define do
     due_date { '2022/10/01' }
     status { '未着手'}
     priority { '低' }
-    user {}
+    user { }
   end
 
   factory :second_task, class: Task do
