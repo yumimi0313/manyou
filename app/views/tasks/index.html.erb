@@ -3,6 +3,8 @@
   <%= f.text_field :title %>
   <%= f.label :status_search %>
   <%= f.select :status, Task.statuses.keys, include_blank: true %>
+  <%= f.label :label_search %>
+  <%= f.select(:label_id, Label.pluck(:name, :id), { include_blank: true }) %>
   <%= f.submit 'Search' %>
 <% end %>
 
@@ -27,8 +29,12 @@
       <% if task.user == current_user %>
         <td><%= link_to '編集', edit_task_path(task), class: "btn btn-secondary" %></td>
         <td><%= link_to '削除', task_path(task), method: :delete, data: { confirm: '本当に削除しても良いですか？' }, class: "btn btn-dark" %></td>
-      <% else %>
       <% end %>
+      <td>
+        <% task.labels.each do |label| %>
+          <%= label.name %>
+        <% end %>
+      </td>
       </tr>
   <% end %>
 </table>

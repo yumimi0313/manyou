@@ -15,3 +15,23 @@
                password: password,
                )
 end
+
+10.times do |i|
+  Label.create!(name: "sample#{i + 1}")
+end
+
+10.times do |n|
+  title = "sample#{n + 1}"
+  content = "sample#{n + 1}"
+  due_date = Time.zone.now + (20 + n).days
+  status = rand(0..2)
+  priority = rand(0..2)
+
+  Task.create!(title: title,
+                content: content,
+                due_date: due_date,
+                status: status,
+                priority: priority,
+                user_id: 11
+                )
+end
